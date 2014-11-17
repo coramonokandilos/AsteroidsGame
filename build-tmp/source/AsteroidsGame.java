@@ -16,6 +16,7 @@ public class AsteroidsGame extends PApplet {
 
 SpaceShip shaceship;
 Starz [] stars;
+Asteroids [] spaceblockz;
 
 public void setup() 
 {
@@ -27,6 +28,11 @@ public void setup()
   {
     stars[i] = new Starz();
   }
+  spaceblockz = new Asteroids[7];
+  for(int i = 0; i < spaceblockz.length; i++)
+  {
+    spaceblockz[i] = new Asteroids();
+  }
 }
 public void draw() 
 {
@@ -35,8 +41,15 @@ public void draw()
   {
     stars[j].show();
   }
+  for (int i = 0; i <spaceblockz.length; i++)
+  {
+    spaceblockz[i].move();
+    spaceblockz[i].show();
+
+  }
   shaceship.move();
   shaceship.show();  
+
 
 }
 public void keyPressed()
@@ -58,35 +71,17 @@ public void keyPressed()
   {
     shaceship.rotate(-5); 
   }
+  else if (key == ' ')
+  {
+    shaceship.setX((int)(Math.random()*400));
+    shaceship.setY((int)(Math.random()*400));
+    shaceship.setDirectionX(0);
+    shaceship.setDirectionY(0);
+    shaceship.setPointDirection((int)(Math.random()*360));
+  }
 
 }
-class Starz 
-{
-  private int myColor, myCenterX, myCenterY,  color2;
-  Starz()
-  {
-    color2 = 0xff000000;
-    myColor = 0xffFFFFFF;
-    myCenterX = (int)(Math.random() *400);
-    myCenterY = (int)(Math.random() *400);
-  }
-  public void show()
-  {
-    double blink = Math.random();
-    stroke(255);
-    strokeWeight(0.5f);
-    if (blink < 0.5f)
-    {
-      fill(color2);
-    }
-    else
-    {
-      fill(myColor);
-    }
 
-    ellipse(myCenterX, myCenterY, 5, 5);
-  }
-}
 class SpaceShip extends Floater  
 {   
   SpaceShip()
@@ -145,13 +140,97 @@ class SpaceShip extends Floater
     } 
    
     endShape(CLOSE);
-     stroke(255);
-    strokeWeight(1);
-    line((int)(xCorners[5]*Math.cos(dRadians) + myCenterX), (int)(yCorners[5]*Math.sin(dRadians) + myCenterY), (int)(xCorners[1]*Math.cos(dRadians) + myCenterX), (int)(yCorners[1]*Math.sin(dRadians) + myCenterY));  
+  }
 
+}
 
+class Starz 
+{
+  private int myColor, myCenterX, myCenterY,  color2;
+  Starz()
+  {
+    color2 = 0xff000000;
+    myColor = 0xffFFFFFF;
+    myCenterX = (int)(Math.random() *400);
+    myCenterY = (int)(Math.random() *400);
+  }
+  public void show()
+  {
+    double blink = Math.random();
+    stroke(255);
+    strokeWeight(0.5f);
+    if (blink < 0.5f)
+    {
+      fill(color2);
+    }
+    else
+    {
+      fill(myColor);
+    }
+
+    ellipse(myCenterX, myCenterY, 5, 5);
   }
 }
+
+class Asteroids extends Floater
+{
+  private int rotateRock;
+  public Asteroids()
+  {
+
+  corners = 12;
+  xCorners = new int[corners];
+  yCorners = new int[corners];
+  xCorners[0] = 6;
+  yCorners[0] = 0;
+  xCorners[1] = 7;
+  yCorners[1] = 5;
+  xCorners[2] = 5;
+  yCorners[2] = 7;
+  xCorners[3] = -5;
+  yCorners[3] = 6;
+  xCorners[4] = -6;
+  yCorners[4] = 5;
+  xCorners[5] = -7;
+  yCorners[5] = 0;
+  xCorners[6] = -6;
+  yCorners[6] = -5;
+  xCorners[7] = -5;
+  yCorners[7] = -5;
+  xCorners[8] = 0;
+  yCorners[8] = -7;
+  xCorners[9] = 5;
+  yCorners[9] = -6;
+  xCorners[10] = 7;
+  yCorners[10] = -5;
+  xCorners[11] = 6;
+  yCorners[11] = 0;
+  myColor = 0xff808080;
+  myCenterX = 200;
+  myCenterY = 200;
+  myDirectionX = (double)((Math.random()*6)-3);
+  myDirectionY = (double)((Math.random()*6)-3);;
+  myPointDirection = 0;
+  rotateRock = (int)((Math.random()*10)-5);
+  }
+  public void setX(int x){myCenterX = x;}  
+  public int getX(){return (int)myCenterX;}   
+  public void setY(int y){myCenterY = y;}   
+  public int getY(){return (int)myCenterY;}    
+  public void setDirectionX(double x){myDirectionX = x;}   
+  public double getDirectionX(){return myDirectionX;}   
+  public void setDirectionY(double y){myDirectionY = y;}   
+  public double getDirectionY(){return myDirectionY;} 
+  public void setPointDirection(int degrees){myPointDirection = degrees;}   
+  public double getPointDirection(){return myPointDirection;} 
+  public void move()
+  {
+    rotate(rotateRock);
+    super.move();
+  }
+  
+}
+
 abstract class Floater 
 {   
   protected int corners; 
