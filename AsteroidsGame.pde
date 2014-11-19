@@ -170,12 +170,10 @@ class Asteroids extends Floater
   yCorners = new int[corners];
   xCorners[0] = 10;
   yCorners[0] = 0;
-  xCorners[1] = 11;
-  yCorners[1] = 9;
-  xCorners[2] = 9;
-  yCorners[2] = 11;
-  xCorners[3] = -9;
-  yCorners[3] = 10;
+  xCorners[1] = 12;
+  yCorners[1] = 12;
+  xCorners[2] = 6;
+  yCorners[2] = 9;
   xCorners[4] = -10;
   yCorners[4] = 9;
   xCorners[5] = -11;
