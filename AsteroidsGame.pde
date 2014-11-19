@@ -1,22 +1,21 @@
 SpaceShip shaceship;
 Starz [] stars;
-Asteroids [] spaceblockz;
+ArrayList <Asteroids> spaceblockz = new ArrayList <Asteroids>();
 
 public void setup() 
 {
   background(0);
   size(400, 400);
+  spaceblockz.add(new Asteroids());
+  spaceblockz.add(new Asteroids());
+  spaceblockz.add(new Asteroids());
   shaceship = new SpaceShip();
   stars = new Starz[100];
   for (int i = 0; i < stars.length; i++)
   {
     stars[i] = new Starz();
   }
-  spaceblockz = new Asteroids[7];
-  for(int i = 0; i < spaceblockz.length; i++)
-  {
-    spaceblockz[i] = new Asteroids();
-  }
+
 }
 public void draw() 
 {
@@ -25,10 +24,14 @@ public void draw()
   {
     stars[j].show();
   }
-  for (int i = 0; i <spaceblockz.length; i++)
+  for (int i = 0; i < spaceblockz.size(); i++)
   {
-    spaceblockz[i].move();
-    spaceblockz[i].show();
+    spaceblockz.get(i).move();
+    spaceblockz.get(i).show();
+    if(dist(spaceblockz.get(i).getX(), spaceblockz.get(i).getY(), shaceship.getX(), shaceship.getY()) < 15) //fix the syntax?
+    {
+      spaceblockz.remove(i);
+    } 
 
   }
   shaceship.move();
@@ -191,7 +194,7 @@ class Asteroids extends Floater
   yCorners[11] = 0;
   myColor = #808080;
   myCenterX = 200;
-  myCenterY = 200;
+  myCenterY = 0;
   myDirectionX = (double)((Math.random()*6)-3);
   myDirectionY = (double)((Math.random()*6)-3);;
   myPointDirection = 0;
