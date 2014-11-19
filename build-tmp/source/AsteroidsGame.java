@@ -21,7 +21,7 @@ ArrayList <Asteroids> spaceblockz = new ArrayList <Asteroids>();
 public void setup() 
 {
   background(0);
-  size(400, 400);
+  size(600, 600);
   spaceblockz.add(new Asteroids());
   spaceblockz.add(new Asteroids());
   spaceblockz.add(new Asteroids());
@@ -48,7 +48,6 @@ public void draw()
     {
       spaceblockz.remove(i);
     } 
-
 
   }
   shaceship.move();
@@ -77,8 +76,8 @@ public void keyPressed()
   }
   else if (key == ' ')
   {
-    shaceship.setX((int)(Math.random()*400));
-    shaceship.setY((int)(Math.random()*400));
+    shaceship.setX((int)(Math.random()*600));
+    shaceship.setY((int)(Math.random()*600));
     shaceship.setDirectionX(0);
     shaceship.setDirectionY(0);
     shaceship.setPointDirection((int)(Math.random()*360));
@@ -110,8 +109,8 @@ class SpaceShip extends Floater
   xCorners[7] = 6;
   yCorners[7] = 4;
   myColor = 0xffFF007F;
-  myCenterX = 200;
-  myCenterY = 200;
+  myCenterX = 300;
+  myCenterY = 300;
   myDirectionX = 0;
   myDirectionY = 0;
   myPointDirection = 0;
@@ -155,8 +154,8 @@ class Starz
   {
     color2 = 0xff000000;
     myColor = 0xffFFFFFF;
-    myCenterX = (int)(Math.random() *400);
-    myCenterY = (int)(Math.random() *400);
+    myCenterX = (int)(Math.random() *600);
+    myCenterY = (int)(Math.random() *600);
   }
   public void show()
   {
@@ -185,32 +184,32 @@ class Asteroids extends Floater
   corners = 12;
   xCorners = new int[corners];
   yCorners = new int[corners];
-  xCorners[0] = 6;
+  xCorners[0] = 10;
   yCorners[0] = 0;
-  xCorners[1] = 7;
-  yCorners[1] = 5;
-  xCorners[2] = 5;
-  yCorners[2] = 7;
-  xCorners[3] = -5;
-  yCorners[3] = 6;
-  xCorners[4] = -6;
-  yCorners[4] = 5;
-  xCorners[5] = -7;
+  xCorners[1] = 11;
+  yCorners[1] = 9;
+  xCorners[2] = 9;
+  yCorners[2] = 11;
+  xCorners[3] = -9;
+  yCorners[3] = 10;
+  xCorners[4] = -10;
+  yCorners[4] = 9;
+  xCorners[5] = -11;
   yCorners[5] = 0;
-  xCorners[6] = -6;
-  yCorners[6] = -5;
-  xCorners[7] = -5;
-  yCorners[7] = -5;
+  xCorners[6] = -10;
+  yCorners[6] = -9;
+  xCorners[7] = -9;
+  yCorners[7] = -9;
   xCorners[8] = 0;
-  yCorners[8] = -7;
-  xCorners[9] = 5;
-  yCorners[9] = -6;
-  xCorners[10] = 7;
-  yCorners[10] = -5;
-  xCorners[11] = 6;
+  yCorners[8] = -11;
+  xCorners[9] = 9;
+  yCorners[9] = -10;
+  xCorners[10] = 11;
+  yCorners[10] = -9;
+  xCorners[11] = 10;
   yCorners[11] = 0;
   myColor = 0xff808080;
-  myCenterX = 200;
+  myCenterX = 300;
   myCenterY = 0;
   myDirectionX = (double)((Math.random()*6)-3);
   myDirectionY = (double)((Math.random()*6)-3);;
