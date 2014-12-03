@@ -17,6 +17,7 @@ public class AsteroidsGame extends PApplet {
 SpaceShip shaceship;
 Starz [] stars;
 ArrayList <Asteroids> spaceblockz = new ArrayList <Asteroids>();
+ArrayList <Bullet> magic = new ArrayList <Bullet>();
 
 public void setup() 
 {
@@ -44,14 +45,28 @@ public void draw()
   {
     spaceblockz.get(i).move();
     spaceblockz.get(i).show();
-    if(dist(spaceblockz.get(i).getX(), spaceblockz.get(i).getY(), shaceship.getX(), shaceship.getY()) < 15) //fix the syntax?
+    if(dist(spaceblockz.get(i).getX(), spaceblockz.get(i).getY(), shaceship.getX(), shaceship.getY()) < 15) 
     {
       spaceblockz.remove(i);
     } 
 
+  for (int m = 0; m < magic.size(); m++)
+  {
+    magic.get(m).move();  
+    magic.get(m).show();
+    for (int j = 0; j < spaceblockz.size(); j++)
+    {
+      if(dist(magic.get(m).getX(), magic.get(m).getY(), spaceblockz.get(j).getX(), spaceblockz.get(j).getY()) < 15)
+      {
+        spaceblockz.remove(j);
+      } 
+    }
+  }
   }
   shaceship.move();
-  shaceship.show();  
+  shaceship.show();
+
+
 
 
 }
@@ -82,6 +97,7 @@ public void keyPressed()
     shaceship.setDirectionY(0);
     shaceship.setPointDirection((int)(Math.random()*360));
   }
+  else if (keyCode == 'B'){magic.add(new Bullet(shaceship));}
 
 }
 
@@ -231,6 +247,41 @@ class Asteroids extends Floater
   }
   
 }
+
+class Bullet extends Floater
+{
+    public Bullet(SpaceShip shaceship)
+    {
+  myPointDirection = shaceship.getPointDirection();
+  myColor = 0xff0066FF;
+  myCenterX = shaceship.getX();
+  myCenterY = shaceship.getY();
+  double dRadians = myPointDirection*(Math.PI/180);
+  myPointDirection = shaceship.getPointDirection();
+  myDirectionX = 5 * Math.cos(dRadians) + shaceship.getDirectionX(); //fix the mydirectionX + Y
+  myDirectionY = 5 * Math.sin(dRadians) + shaceship.getDirectionY();
+
+    }
+  public void setX(int x){myCenterX = x;}  
+  public int getX(){return (int)myCenterX;}   
+  public void setY(int y){myCenterY = y;}   
+  public int getY(){return (int)myCenterY;}    
+  public void setDirectionX(double x){myDirectionX = x;}   
+  public double getDirectionX(){return myDirectionX;}   
+  public void setDirectionY(double y){myDirectionY = y;}   
+  public double getDirectionY(){return myDirectionY;} 
+  public void setPointDirection(int degrees){myPointDirection = degrees;}   
+  public double getPointDirection(){return myPointDirection;} 
+
+ public void show ()    
+  {               
+    stroke(myColor); 
+    strokeWeight(1);                  
+    ellipse((int)myCenterX, (int)myCenterY, 10, 10);
+  }
+
+}
+
 
 abstract class Floater 
 {   
